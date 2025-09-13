@@ -8,9 +8,6 @@ public class User {
     private String role;
     private boolean isActive;
 
-    public User() {
-    }
-
     public User(String name, String email, String role) {
         this.name = name;
         this.email = email;
@@ -19,15 +16,17 @@ public class User {
         setPassword(name);
     }
 
-    public User(long userId, String name, String email, String role,boolean isActive) {
+    public User(long userId, String name, String email,String password, String role,boolean isActive) {
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.role = role;
+        this.password=password;
         this.isActive=isActive;
     }
 
-    public User(String name, String email, String role, boolean isActive) {
+    public User(long userId, String name, String email, String role, boolean isActive) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.role = role;

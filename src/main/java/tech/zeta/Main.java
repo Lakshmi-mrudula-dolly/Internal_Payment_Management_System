@@ -1,35 +1,52 @@
 package tech.zeta;
 
-import tech.zeta.dao.impl.PaymentDAOImpl;
-import tech.zeta.dao.impl.UserDAOImpl;
-import tech.zeta.model.Payment;
+import tech.zeta.exception.InvalidPasswordException;
+import tech.zeta.exception.InvalidUserException;
+import tech.zeta.menu.*;
 import tech.zeta.model.User;
-import tech.zeta.util.DBUtil;
+import tech.zeta.service.UserService;
 
-import java.sql.Connection;
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-        Connection connection= DBUtil.getConnection();
-        if(connection!=null) System.out.println("Sucessful");
-        else System.out.println("Failed");
-        UserDAOImpl a=new UserDAOImpl();
-        //a.createUser(new User("John","john@gmail.com","finance manager"));
-        //a.createUser(new User("Daniel","daniel@gmail.com","viewer"));
-       // a.updateUserRoleById(13,"finance manager");
-      /*  List<User> users=a.getAllUsers();
-        for(User user:users){
-            System.out.println(user.getUserId()+" "+user.getName()+" "+user.getRole()+" "+user.getIsActive());
-        }*/
 
-        PaymentDAOImpl p=new PaymentDAOImpl();
-       // p.addPayment(new Payment(25000,"Outgoing","Completed", LocalDate.parse("2024-04-25"),3,1));
-        List<Payment> payments=p.generateQuarterlyReport(1,2024);
-        for(Payment payment:payments){
-            System.out.println(payment.getAmount()+" "+payment.getDate()+" "+payment.getStatus());
-        }
+        UserService userService = new UserService();
+        Scanner scanner = new Scanner(System.in);
+        String option="Yes";
 
+        do {
+            System.out.println("<<<<<<<<<<<<<<< Payments Management System >>>>>>>>>>>>>");
+            System.out.print("Enter email: ");
+            String email = scanner.nextLine();
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
+
+            try {
+                User loggedInUser = userService.login(email, password);
+                if (loggedInUser != null) {
+                    System.out.println("Login successful! Welcome ");
+
+                    switch (loggedInUser.getRole()) {  // if role is a String
+                        case "admin":
+                            new AdminMenu().show(loggedInUser);
+                            break;
+                        case "finance manager":
+                            new FinanceManagerMenu().show(loggedInUser);
+                            break;
+                        case "viewer":
+                            new ViewerMenu().show();
+                            break;
+                        default:
+                            System.out.println("Invalid role assigned.");
+                    }
+                }
+            } catch (InvalidUserException | InvalidPasswordException exception) {
+                System.err.println(exception.getMessage());
+            }
+            System.out.print("Enter Yes to continue : ");
+            option = scanner.nextLine();
+        }while(option.equals("Yes"));
     }
 }

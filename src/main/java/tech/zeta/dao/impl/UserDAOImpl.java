@@ -18,12 +18,11 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void createUser(User user) {
         String email = user.getEmail().trim();
-        long existingId = getIdByEmail(email);
-        if (existingId != -1) {
+        if (getUserByEmail(email)!=null) {
             makeExistingUserActive(user);
         } else {
             createNewUser(user);
-            user.setUserId(getIdByEmail(email));
+            user.setUserId(getUserByEmail(email).getUserId());
         }
     }
 
@@ -76,20 +75,23 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public long getIdByEmail(String email) {
-        String sql="select user_id from users where email = ?";
-        long id = -1;
+    public User getUserByEmail(String email) {
+        String sql="select user_id,name,email,password,role,is_active from users where email = ?";
+        User user=null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, email.trim());
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) id = resultSet.getLong("user_id");
+            if (resultSet.next()){
+                user=new User(resultSet.getLong(1), resultSet.getString(2),
+                        resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getBoolean(6));
+            }
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-        return id;
+        return user;
     }
 
     public void makeExistingUserActive(User user) {
