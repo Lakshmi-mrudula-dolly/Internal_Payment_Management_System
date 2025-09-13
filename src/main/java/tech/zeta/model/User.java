@@ -7,13 +7,11 @@ public class User {
     private String password;
     private String role;
     private boolean isActive;
-    private long currentId=1;
 
     public User() {
     }
 
     public User(String name, String email, String role) {
-        this.userId = ++currentId;
         this.name = name;
         this.email = email;
         this.role = role;
@@ -21,11 +19,26 @@ public class User {
         setPassword(name);
     }
 
-    public long getUser_id() {
+    public User(long userId, String name, String email, String role,boolean isActive) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.isActive=isActive;
+    }
+
+    public User(String name, String email, String role, boolean isActive) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.isActive = isActive;
+    }
+
+    public long getUserId() {
         return userId;
     }
 
-    public void setUser_id(long userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -52,7 +65,7 @@ public class User {
     public void setPassword(String name) {
         String reverseName="";
         for(int index=name.length()-1;index>=0;index--) reverseName+=name.charAt(index);
-        this.password=password;
+        this.password=reverseName;
     }
 
     public String getRole() {

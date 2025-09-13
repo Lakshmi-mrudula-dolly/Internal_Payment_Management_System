@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class Payment {
     private long paymentId;
     private double amount;
-    private PaymentType type;
-    private PaymentStatus status;
+    private String type;
+    private String status;
     private LocalDate date;
     private int categoryId;
     private long userId;
@@ -14,8 +14,17 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(long paymentId, double amount, PaymentType type, PaymentStatus status, LocalDate date, int categoryId, long userId) {
+    public Payment(long paymentId, double amount, String type, String status, LocalDate date, int categoryId, long userId) {
         this.paymentId = paymentId;
+        this.amount = amount;
+        this.type = type;
+        this.status = status;
+        this.date = date;
+        this.categoryId = categoryId;
+        this.userId = userId;
+    }
+
+    public Payment(double amount, String type, String status, LocalDate date, int categoryId, long userId) {
         this.amount = amount;
         this.type = type;
         this.status = status;
@@ -40,19 +49,19 @@ public class Payment {
         this.amount = amount;
     }
 
-    public PaymentType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(PaymentType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public PaymentStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(PaymentStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
