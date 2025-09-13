@@ -2,6 +2,7 @@ package tech.zeta.menu;
 
 import tech.zeta.dao.PaymentDAO;
 import tech.zeta.dao.impl.PaymentDAOImpl;
+import tech.zeta.dto.ReportDTO;
 import tech.zeta.model.Payment;
 import tech.zeta.service.ViewerService;
 import java.util.List;
@@ -48,15 +49,13 @@ public class ViewerMenu {
         System.out.print("Enter year (e.g., 2025): ");
         int year = scanner.nextInt();
 
-        List<Payment> report = viewerService.viewMonthlyReport(month, year);
-        if (report.isEmpty()) {
-            System.out.println("No payments found for " + month + "/" + year);
-        } else {
-            System.out.println("===== Monthly Report for " + month + "/" + year + " =====");
+        List<ReportDTO> report = viewerService.viewMonthlyReport(month, year);
 
-            report.forEach(payment-> System.out.println("Amount : "+payment.getAmount()+", Type : "
-                    +payment.getType()+", Payment Status : "+payment.getStatus()
-                    +", Payment Date : "+payment.getDate()));
+        if (report.isEmpty()) {
+            System.out.println("No records found for " + month + "/" + year);
+        } else {
+            System.out.println("===== Monthly Financial Report for " + month + "/" + year + " =====");
+            report.forEach(r -> System.out.println(r.getCategoryName() + " : " + r.getTotalAmount()));
         }
     }
 
@@ -66,15 +65,13 @@ public class ViewerMenu {
         System.out.print("Enter year (e.g., 2025): ");
         int year = scanner.nextInt();
 
-        List<Payment> report = viewerService.viewQuarterlyReport(quarter, year);
-        if (report.isEmpty()) {
-            System.out.println("No payments found for Q" + quarter + "/" + year);
-        } else {
-            System.out.println("===== Quarterly Report for Q" + quarter + "/" + year + " =====");
+        List<ReportDTO> report = viewerService.viewQuarterlyReport(quarter, year);
 
-            report.forEach(payment-> System.out.println("Amount : "+payment.getAmount()+", Type : "
-                    +payment.getType()+", Payment Status : "+payment.getStatus()
-                    +", Payment Date : "+payment.getDate()));
+        if (report.isEmpty()) {
+            System.out.println("No records found for Q" + quarter + "/" + year);
+        } else {
+            System.out.println("===== Quarterly Financial Report for Q" + quarter + "/" + year + " =====");
+            report.forEach(r -> System.out.println(r.getCategoryName() + " : " + r.getTotalAmount()));
         }
     }
 }

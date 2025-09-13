@@ -1,6 +1,7 @@
 package tech.zeta.dao.impl;
 
 import tech.zeta.dao.PaymentDAO;
+import tech.zeta.dto.ReportDTO;
 import tech.zeta.model.Payment;
 import tech.zeta.util.DBUtil;
 
@@ -54,51 +55,57 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     }
 
-    @Override
-    public List<Payment> generateMonthlyReport(int month, int year) {
-        String sql = "select * from payments where extract(month from payment_date) = ? and extract(year from payment_date) = ?";
-        List<Payment> payments = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, month);
-            preparedStatement.setInt(2, year);
+    public List<ReportDTO> generateMonthlyReport(int month, int year) {
+        String sql = "SELECT c.category_name, SUM(p.amount) AS total_amount " +
+                "FROM payments p " +
+                "JOIN categories c ON p.category_id = c.category_id " +
+                "WHERE EXTRACT(MONTH FROM p.payment_date) = ? " +
+                "AND EXTRACT(YEAR FROM p.payment_date) = ? " +
+                "GROUP BY c.category_name";
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+        List<ReportDTO> reports = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, month);
+            ps.setInt(2, year);
 
-            while (resultSet.next()) {
-                payments.add(mapResultSetToPayment(resultSet));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                reports.add(new ReportDTO(rs.getString("category_name"), rs.getDouble("total_amount")));
             }
-
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        return payments;
+        return reports;
     }
 
     @Override
-    public List<Payment> generateQuarterlyReport(int quarter, int year) {
-        int startMonth = (quarter - 1) * 4 + 1;
-        int endMonth = startMonth + 3;
-        String sql = "select * from payments where extract(month from payment_date) between ? and ? and extract(year from payment_date) = ?";
-        List<Payment> payments = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, startMonth);
-            preparedStatement.setInt(2, endMonth);
-            preparedStatement.setInt(3, year);
+    public List<ReportDTO> generateQuarterlyReport(int quarter, int year) {
+        int startMonth = (quarter - 1) * 3 + 1;
+        int endMonth = startMonth + 2;
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+        String sql = "SELECT c.category_name, SUM(p.amount) AS total_amount " +
+                "FROM payments p " +
+                "JOIN categories c ON p.category_id = c.category_id " +
+                "WHERE EXTRACT(MONTH FROM p.payment_date) BETWEEN ? AND ? " +
+                "AND EXTRACT(YEAR FROM p.payment_date) = ? " +
+                "GROUP BY c.category_name";
 
-            while (resultSet.next()) {
-                payments.add(mapResultSetToPayment(resultSet));
+        List<ReportDTO> reports = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, startMonth);
+            ps.setInt(2, endMonth);
+            ps.setInt(3, year);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                reports.add(new ReportDTO(
+                        rs.getString("category_name"),
+                        rs.getDouble("total_amount")));
             }
-
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        return payments;
+        return reports;
     }
     private Payment mapResultSetToPayment(ResultSet rs) throws SQLException {
         return new Payment(

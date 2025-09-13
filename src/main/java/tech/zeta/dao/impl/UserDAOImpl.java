@@ -18,9 +18,13 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void createUser(User user) {
         String email = user.getEmail().trim();
-        if (getUserByEmail(email)!=null) {
+        User existingUser=getUserByEmail(email);
+        if (existingUser!=null && !existingUser.getIsActive()) {
             makeExistingUserActive(user);
-        } else {
+        }
+        else if(existingUser!=null && existingUser.getIsActive()){
+            System.out.println("User already exists");
+        }else {
             createNewUser(user);
             user.setUserId(getUserByEmail(email).getUserId());
         }

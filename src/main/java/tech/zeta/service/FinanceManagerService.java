@@ -1,6 +1,7 @@
 package tech.zeta.service;
 
 import tech.zeta.dao.PaymentDAO;
+import tech.zeta.dto.ReportDTO;
 import tech.zeta.model.Payment;
 import java.util.List;
 import tech.zeta.util.AuditLogUtil;
@@ -29,19 +30,17 @@ public class FinanceManagerService {
                 "Updated paymentId " + paymentId + " status to " + status);
     }
 
-    // Generate Monthly Report
-    public List<Payment> generateMonthlyReport(int month, int year) {
-        List<Payment> report = paymentDAO.generateMonthlyReport(month, year);
+    public List<ReportDTO> generateMonthlyReport(int month, int year) {
+        List<ReportDTO> report = paymentDAO.generateMonthlyReport(month, year);
         AuditLogUtil.logAction(financeManagerId,
-                "Generated monthly report for " + month + "/" + year);
+                "Generated monthly financial report for " + month + "/" + year);
         return report;
     }
 
-    // Generate Quarterly Report
-    public List<Payment> generateQuarterlyReport(int quarter, int year) {
-        List<Payment> report = paymentDAO.generateQuarterlyReport(quarter, year);
+    public List<ReportDTO> generateQuarterlyReport(int quarter, int year) {
+        List<ReportDTO> report = paymentDAO.generateQuarterlyReport(quarter, year);
         AuditLogUtil.logAction(financeManagerId,
-                "Generated quarterly report for Q" + quarter + "/" + year);
+                "Generated quarterly financial report for Q" + quarter + "/" + year);
         return report;
     }
 }

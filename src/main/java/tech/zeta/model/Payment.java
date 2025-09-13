@@ -11,7 +11,13 @@ public class Payment {
     private int categoryId;
     private long userId;
 
-    public Payment() {
+    public Payment(double amount, String type, String status, LocalDate date, long userId, int categoryId) {
+        this.amount = amount;
+        this.type = type;
+        this.status = status;
+        this.date = date;
+        this.userId = userId;
+        this.categoryId = categoryId;
     }
 
     public Payment(long paymentId, double amount, String type, String status, LocalDate date, int categoryId, long userId) {
@@ -24,7 +30,7 @@ public class Payment {
         this.userId = userId;
     }
 
-    public Payment(double amount, String type, String status, LocalDate date, int categoryId, long userId) {
+    public Payment(double amount, String type, String status, LocalDate date, int categoryId) {
         this.amount = amount;
         this.type = type;
         this.status = status;
@@ -32,6 +38,8 @@ public class Payment {
         this.categoryId = categoryId;
         this.userId = userId;
     }
+
+
 
     public long getPaymentId() {
         return paymentId;

@@ -45,7 +45,7 @@ public class Main {
             } catch (InvalidUserException | InvalidPasswordException exception) {
                 System.err.println(exception.getMessage());
             }
-            System.out.print("Enter Yes to continue : ");
+            System.out.println("Enter Yes to continue : ");
             option = scanner.nextLine();
         }while(option.equals("Yes"));
     }

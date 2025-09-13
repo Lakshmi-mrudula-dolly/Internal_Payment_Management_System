@@ -8,12 +8,21 @@ import tech.zeta.model.User;
 
 public class UserService {
 
+    public static UserDAO userDAO=new UserDAOImpl();
+
     public User login(String email,String password) throws InvalidUserException, InvalidPasswordException{
 
-        UserDAO userDAO=new UserDAOImpl();
+        if(doesUserExists(email)==-1) throw new InvalidUserException("User does not exist");
+        else {
+            User user=userDAO.getUserByEmail(email);
+            if (!user.getPassword().equals(password)) throw new InvalidPasswordException("Invalid Password");
+            return user;
+        }
+    }
+    public static long doesUserExists(String email){
+
         User user=userDAO.getUserByEmail(email);
-        if(user==null || !user.getIsActive()) throw new InvalidUserException("User does not exist");
-        else if(!user.getPassword().equals(password)) throw new InvalidPasswordException("Invalid Password");
-        return user;
+        if(user==null || !user.getIsActive()) return -1;
+        else return user.getUserId();
     }
 }

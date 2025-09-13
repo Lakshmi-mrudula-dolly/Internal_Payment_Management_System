@@ -10,6 +10,8 @@ import java.util.List;
 
 import java.util.Scanner;
 
+import static tech.zeta.service.UserService.doesUserExists;
+
 public class AdminMenu {
 
     Scanner scanner=new Scanner(System.in);
@@ -18,6 +20,8 @@ public class AdminMenu {
 
     public void show(User admin) {
         int choice;
+        String userEmail;
+        long id;
         do {
             System.out.println("\n<<<<<< Admin Menu >>>>>");
             System.out.println("1. Add User");
@@ -39,32 +43,47 @@ public class AdminMenu {
                     System.out.print("Enter email of the user : ");
                     String email = scanner.nextLine();
 
-                    System.out.print("Enter role of the new User : ");
+                    System.out.print("Enter role of the new User (admin/finance manager/viewer) : ");
                     String role = scanner.nextLine();
 
                     User newUser = new User(name,email,role);
-                    adminService.createUser(newUser,admin.getUserId());
+                    if(isValidUser(newUser)) adminService.createUser(newUser,admin.getUserId());
+                    else System.out.println("Invalid details ");
                     break;
 
                 case 2:
 
-                    System.out.println("Enter id of the user ");
-                    long userId = scanner.nextLong();
-                    scanner.nextLine();
+                    System.out.print("Enter email of the user you want to update : ");
+                    userEmail = scanner.nextLine();
+                    if(!isValidEmail(userEmail)) {
+                        System.out.println("InValid email");
+                        break;
+                    }
 
                     System.out.println("Enter updated role : ");
                     String newRole = scanner.nextLine();
+                    if(!isValidRole(newRole)) {
+                        System.out.println("InValid role");
+                        break;
+                    }
 
-                    adminService.updateUserRoleById(userId,newRole, admin.getUserId());
+                    id=doesUserExists(userEmail);
+                    if(id!=-1){ adminService.updateUserRoleById(id,newRole, admin.getUserId()); }
+                    else System.out.println("User does not exist");
                     break;
 
                 case 3:
 
-                    System.out.print("Enter id of the user you want to delete : ");
-                    long id = scanner.nextLong();
-                    scanner.nextLine();
+                    System.out.print("Enter email of the user you want to delete : ");
+                    userEmail = scanner.nextLine();
+                    if(!isValidEmail(userEmail)) {
+                        System.out.println("InValid email");
+                        break;
+                    }
 
-                    adminService.deleteUserById(id, admin.getUserId());
+                    id=doesUserExists(userEmail);
+                    if(id!=-1){ adminService.deleteUserById(id, admin.getUserId()); }
+                    else System.out.println("User does not exist");
                     break;
 
                 case 4:
@@ -94,5 +113,20 @@ public class AdminMenu {
                     System.out.println("Invalid choice.");
             }
         } while (choice != 0);
+    }
+
+    public boolean isValidUser(User user){          //User name,email,role must be valid in order to create new user
+        if(user.getName().isEmpty()) return false;
+        if(!isValidEmail(user.getEmail())) return false;
+        if(!isValidRole(user.getRole())) return false; // The user role should be one of the three
+        return true;
+    }
+
+    public boolean isValidEmail(String email){
+        return email.contains("@") && email.contains(".");
+    }
+
+    public boolean isValidRole(String role){
+        return (role.equals("admin")||role.equals("finance manager")||role.equals("viewer"));
     }
 }
