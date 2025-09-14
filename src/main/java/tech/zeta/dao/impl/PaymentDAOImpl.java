@@ -61,6 +61,7 @@ public class PaymentDAOImpl implements PaymentDAO {
                 "JOIN categories c ON p.category_id = c.category_id " +
                 "WHERE EXTRACT(MONTH FROM p.payment_date) = ? " +
                 "AND EXTRACT(YEAR FROM p.payment_date) = ? " +
+                "AND status='Completed'"+
                 "GROUP BY c.category_name";
 
         List<ReportDTO> reports = new ArrayList<>();
@@ -88,6 +89,7 @@ public class PaymentDAOImpl implements PaymentDAO {
                 "JOIN categories c ON p.category_id = c.category_id " +
                 "WHERE EXTRACT(MONTH FROM p.payment_date) BETWEEN ? AND ? " +
                 "AND EXTRACT(YEAR FROM p.payment_date) = ? " +
+                "AND status = 'Completed'"+
                 "GROUP BY c.category_name";
 
         List<ReportDTO> reports = new ArrayList<>();
