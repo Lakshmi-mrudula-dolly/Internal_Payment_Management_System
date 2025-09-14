@@ -1,0 +1,45 @@
+2025-09-14T00:31:21.939761 | UserID: 1 | Action: Viewed all users
+2025-09-14T00:39:37.386981 | UserID: 1 | Action: Viewed all users
+2025-09-14T00:40:53.368960 | UserID: 13 | Action: Generated monthly report for 4/2024
+2025-09-14T00:42:56.071774 | UserID: 1 | Action: Viewed all users
+2025-09-14T00:43:14.838378 | UserID: 1 | Action: Deleted user with ID: 13
+2025-09-14T00:43:20.506386 | UserID: 1 | Action: Viewed all users
+2025-09-14T00:45:48.256920 | UserID: 1 | Action: Viewed all users
+2025-09-14T00:47:33.874944 | UserID: 1 | Action: Created new user: John (Email: john@gmail.com) with role: finance manager
+2025-09-14T00:47:38.439861 | UserID: 1 | Action: Viewed all users
+2025-09-14T00:48:13.396411 | UserID: 1 | Action: Updated role of user ID 14 to: viewer
+2025-09-14T00:48:16.793159 | UserID: 1 | Action: Viewed all users
+2025-09-14T00:48:56.599924 | UserID: 1 | Action: Updated role of user ID 2 to: viewer
+2025-09-14T00:49:01.319654 | UserID: 1 | Action: Viewed all users
+2025-09-14T01:13:42.753038 | UserID: 1 | Action: Viewed all users
+2025-09-14T01:18:22.296805 | UserID: 1 | Action: Created new user: Smith (Email: smith@gmail.com) with role: finance manager
+2025-09-14T01:18:27.244641 | UserID: 1 | Action: Viewed all users
+2025-09-14T01:22:53.182923 | UserID: 15 | Action: Added payment of amount 9090.0 for userId: 14
+2025-09-14T01:23:30.927231 | UserID: 15 | Action: Updated paymentId 3 status to Completed
+2025-09-14T01:24:07.849650 | UserID: 15 | Action: Generated monthly report for 9/2025
+2025-09-14T01:24:36.672184 | UserID: 15 | Action: Generated quarterly report for Q4/2025
+2025-09-14T01:24:50.951249 | UserID: 15 | Action: Generated quarterly report for Q3/2025
+2025-09-14T01:27:05.267433 | UserID: 1 | Action: Created new user:  (Email: ) with role:
+2025-09-14T01:27:12.205476 | UserID: 1 | Action: Viewed all users
+2025-09-14T01:28:11.718072 | UserID: 1 | Action: Created new user: Tom (Email: ) with role:
+2025-09-14T01:28:15.392263 | UserID: 1 | Action: Viewed all users
+2025-09-14T02:16:32.291198 | UserID: 1 | Action: Created new user: mrudula (Email: mrudula@gmail.com) with role: admin
+2025-09-14T02:16:36.165797 | UserID: 1 | Action: Viewed all users
+2025-09-14T02:17:15.293548 | UserID: 1 | Action: Created new user: Smith (Email: smith@gmail.com) with role: admin
+2025-09-14T02:17:19.072294 | UserID: 1 | Action: Viewed all users
+2025-09-14T02:28:45.743610 | UserID: 1 | Action: Viewed all users
+2025-09-14T02:29:12.548828 | UserID: 1 | Action: Created new user: Smith (Email: htimS) with role: viewer
+2025-09-14T02:30:31.631787 | UserID: 1 | Action: Viewed all users
+2025-09-14T02:34:22.265267 | UserID: 1 | Action: Viewed all users
+2025-09-14T02:34:51.474416 | UserID: 1 | Action: Created new user: Smith (Email: smith@gmail.com) with role: viewer
+2025-09-14T02:40:45.159224 | UserID: 1 | Action: Viewed all users
+2025-09-14T02:41:08.079475 | UserID: 1 | Action: Updated role of user ID 15 to: viewer
+2025-09-14T02:41:10.554017 | UserID: 1 | Action: Viewed all users
+2025-09-14T02:44:25.000753 | UserID: 1 | Action: Viewed all users
+2025-09-14T03:31:47.159422 | UserID: 13 | Action: Generated monthly financial report for 4/2024
+2025-09-14T03:43:31.517808 | UserID: 13 | Action: Generated quarterly financial report for Q2/2024
+2025-09-14T03:47:18.047052 | UserID: 13 | Action: Added payment of amount 89000.0 for userId: 0
+2025-09-14T03:55:15.595533 | UserID: 13 | Action: Added payment of amount 45678.0 for userId: 13
+2025-09-14T16:19:53.178817 | UserID: 1 | Action: Viewed all users
+2025-09-14T16:20:51.743264 | UserID: 13 | Action: Added payment of amount 65430.0 for userId: 13
+2025-09-14T16:21:02.504352 | UserID: 13 | Action: Generated monthly financial report for 8/2025

@@ -107,15 +107,4 @@ public class PaymentDAOImpl implements PaymentDAO {
         }
         return reports;
     }
-    private Payment mapResultSetToPayment(ResultSet rs) throws SQLException {
-        return new Payment(
-                rs.getLong("payment_id"),
-                rs.getDouble("amount"),
-                rs.getString("payment_type"),
-                rs.getString("status"),
-                rs.getDate("payment_date").toLocalDate(),
-                rs.getInt("category_id"),
-                rs.getLong("user_id")
-        );
-    }
 }

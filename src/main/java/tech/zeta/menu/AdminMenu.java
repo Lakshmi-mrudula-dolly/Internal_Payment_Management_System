@@ -15,7 +15,7 @@ import static tech.zeta.service.UserService.doesUserExists;
 public class AdminMenu {
 
     Scanner scanner=new Scanner(System.in);
-    UserDAO userDAO=new UserDAOImpl();
+    UserDAO userDAO=new UserDAOImpl();            // UserDAO is imolemented by Ud=serDAOImpl
     AdminService adminService=new AdminService(userDAO);
 
     public void show(User admin) {
@@ -47,7 +47,7 @@ public class AdminMenu {
                     String role = scanner.nextLine();
 
                     User newUser = new User(name,email,role);
-                    if(isValidUser(newUser)) adminService.createUser(newUser,admin.getUserId());
+                    if(isValidUser(newUser)) adminService.createUser(newUser,admin.getUserId());   // check whether the information is valid or not
                     else System.out.println("Invalid details ");
                     break;
 
@@ -67,7 +67,7 @@ public class AdminMenu {
                         break;
                     }
 
-                    id=doesUserExists(userEmail);
+                    id=doesUserExists(userEmail);   // gives the id of the user if present otherwise return -1
                     if(id!=-1){ adminService.updateUserRoleById(id,newRole, admin.getUserId()); }
                     else System.out.println("User does not exist");
                     break;
@@ -81,14 +81,14 @@ public class AdminMenu {
                         break;
                     }
 
-                    id=doesUserExists(userEmail);
+                    id=doesUserExists(userEmail);   // gives the id of the user if present otherwise return -1
                     if(id!=-1){ adminService.deleteUserById(id, admin.getUserId()); }
                     else System.out.println("User does not exist");
                     break;
 
                 case 4:
 
-                    AuditLogUtil.readLogs(admin);
+                    AuditLogUtil.readLogs(admin);   // prints the date present in logs/audit.log file
                     break;
 
                 case 5:
@@ -118,7 +118,7 @@ public class AdminMenu {
     public boolean isValidUser(User user){          //User name,email,role must be valid in order to create new user
         if(user.getName().isEmpty()) return false;
         if(!isValidEmail(user.getEmail())) return false;
-        if(!isValidRole(user.getRole())) return false; // The user role should be one of the three
+        if(!isValidRole(user.getRole())) return false; // The user role should be one of the three roles
         return true;
     }
 

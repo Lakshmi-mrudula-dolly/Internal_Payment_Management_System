@@ -40,3 +40,6 @@
 2025-09-14T03:43:31.517808 | UserID: 13 | Action: Generated quarterly financial report for Q2/2024
 2025-09-14T03:47:18.047052 | UserID: 13 | Action: Added payment of amount 89000.0 for userId: 0
 2025-09-14T03:55:15.595533 | UserID: 13 | Action: Added payment of amount 45678.0 for userId: 13
+2025-09-14T16:19:53.178817 | UserID: 1 | Action: Viewed all users
+2025-09-14T16:20:51.743264 | UserID: 13 | Action: Added payment of amount 65430.0 for userId: 13
+2025-09-14T16:21:02.504352 | UserID: 13 | Action: Generated monthly financial report for 8/2025

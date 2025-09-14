@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class AuditLogUtil {
-    private static final String FILE_NAME = "logs/audit.log";
+    private static final String FILE_NAME = "src/main/java/tech/zeta/logs/audit.log";
 
     static {
         try {

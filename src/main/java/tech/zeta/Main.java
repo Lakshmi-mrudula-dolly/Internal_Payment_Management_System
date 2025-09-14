@@ -28,7 +28,7 @@ public class Main {
                 if (loggedInUser != null) {
                     System.out.println("Login successful! Welcome ");
 
-                    switch (loggedInUser.getRole()) {  // if role is a String
+                    switch (loggedInUser.getRole()) {  //Based on the role the menu will be displayed to the user
                         case "admin":
                             new AdminMenu().show(loggedInUser);
                             break;
@@ -45,8 +45,8 @@ public class Main {
             } catch (InvalidUserException | InvalidPasswordException exception) {
                 System.err.println(exception.getMessage());
             }
-            System.out.println("Enter Yes to continue : ");
-            option = scanner.nextLine();
+            System.out.println("Enter Yes to continue : ");  // The system will be available for the other user if typed "Yes"
+            option = scanner.nextLine();                     // otherwise the internal payment sysytem exits.
         }while(option.equals("Yes"));
     }
 }

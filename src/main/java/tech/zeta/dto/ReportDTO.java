@@ -1,6 +1,7 @@
 package tech.zeta.dto;
 
 public class ReportDTO {
+
         private String categoryName;
         private double totalAmount;
 
