@@ -30,7 +30,7 @@ PaymentManagementSystem/
  
 🗄️ Database Schema
 Users Table
-userId (PK, BIGINT)
+user_id (PK, BIGINT)
 name (VARCHAR)
 email (VARCHAR, unique)
 password (VARCHAR)
@@ -38,17 +38,17 @@ role (VARCHAR) → lowercase
 isActive (BOOLEAN)
 
 Payments Table
-paymentId (PK, BIGINT)
+payment_id (PK, BIGINT)
 amount (DECIMAL)
 type (VARCHAR, Title Case: Incoming/Outgoing)
-categoryId (FK → Categories)
+category_id (FK → Categories)
 status (VARCHAR, Title Case: Pending/Completed)
-managerId (FK → Users)
-date (DATE)
+user_id (FK → Users)
+payment_date (DATE)
 
 Categories Table
-categoryId (PK, INT)
-categoryName (VARCHAR) → e.g., Salary, Vendor, Client Invoice
+category_id (PK, INT)
+category_name (VARCHAR) → e.g., Salary, Vendor, Client Invoice
 
 🚀 How to Run
 

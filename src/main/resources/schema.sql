@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS users;
 -- USERS TABLE
 -- ==========================
 CREATE TABLE users (
-    userId BIGSERIAL PRIMARY KEY,
+    user_id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,
@@ -25,8 +25,8 @@ VALUES ('Mrudula', 'mrudula@gmail.com', '12345678', 'admin', TRUE);
 -- CATEGORIES TABLE
 -- ==========================
 CREATE TABLE categories (
-    categoryId SERIAL PRIMARY KEY,
-    categoryName VARCHAR(100) NOT NULL
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL
 );
 
 -- Insert default categories
@@ -38,11 +38,11 @@ INSERT INTO categories (categoryName) VALUES ('Client Invoice');
 -- PAYMENTS TABLE
 -- ==========================
 CREATE TABLE payments (
-    paymentId BIGSERIAL PRIMARY KEY,
+    payment_id BIGSERIAL PRIMARY KEY,
     amount DECIMAL(12,2) NOT NULL,
     type VARCHAR(20) CHECK (type IN ('Incoming', 'Outgoing')),
-    categoryId INT NOT NULL REFERENCES categories(categoryId),
+    category_id INT NOT NULL REFERENCES categories(categoryId),
     status VARCHAR(20) CHECK (status IN ('Pending', 'Completed')),
-    managerId BIGINT NOT NULL REFERENCES users(userId),
-    date DATE NOT NULL
+    user_id BIGINT NOT NULL REFERENCES users(userId),
+    payment_date DATE NOT NULL
 );
