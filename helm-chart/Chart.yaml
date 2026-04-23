@@ -1,12 +1,11 @@
 apiVersion: v2
-name: sample-payments
-description: sample-payments application services for turbo apps
-version: 1.0.65-SNAPSHOT
-
 dependencies:
-- name: common
-  version: 1.0.87
-  repository: '@chartrepo'
-- name: turbo-payment-service
-  version: 1.0.10
-  repository: '@chartrepo'
+    - name: common
+      repository: '@chartrepo'
+      version: 1.0.87
+    - name: turbo-payment-service
+      repository: '@chartrepo'
+      version: 1.0.10
+description: sample-payments application services for turbo apps
+name: sample-payments
+version: 1.0.65
