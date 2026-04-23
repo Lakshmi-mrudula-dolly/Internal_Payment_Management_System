@@ -1,0 +1,8 @@
+serviceAccountName: payments
+payment-management:
+  enabled: true
+  image:
+    pullPolicy: Always
+    repository: 012345678910.idc.ecr.ap-south-1.amazonaws.com
+    repositoryPath: payment-management
+    tag: 0.0.49
