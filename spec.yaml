@@ -1,4 +1,4 @@
-description: SAMPLE-payments- application services
 name: sample-payments
-type: cluster_spec
+description: SAMPLE-payments- application services
 version: 1.0.65
+type: cluster_spec
